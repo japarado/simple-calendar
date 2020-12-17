@@ -65914,3 +65914,4 @@ module.exports = __webpack_require__(/*! /home/pam/repos/simple-calendar/resourc
 /***/ })
 
 /******/ });
+//# sourceMappingURL=app.js.map

@@ -12,4 +12,10 @@ const mix = require('laravel-mix');
  */
 
 mix.react('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+	.sourceMaps(true, "source-map")
+	.browserSync({
+		proxy: "https://simple-calendar.apc",
+		open: false
+	});
+
