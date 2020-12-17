@@ -1,24 +1,40 @@
-import React from "react";
+import React, {Component} from "react";
+
 import Navbar from "../../components/Navbar/Navbar";
+import CalendarForm from "../../components/CalendarForm/CalendarForm";
 
-const Home = () => 
+class Home extends Component
 {
-	return (
-		<>
-			<Navbar/>
+	handleSubmitCreate = (event, e) => 
+	{
+		e.preventDefault();
+	}
 
-			<main className="container-fluid">
-				<div className="row">
-					<div className="col-md-4 col-xs-12">
-						Form
-					</div>
-					<div className="col-md-8 col-xs-12">
+	render() 
+	{
+		return (
+			<>
+				<Navbar/>
+
+				<main className="container-fluid pt-5">
+					<div className="row">
+						<div className="col-md-4 col-xs-12">
+							<CalendarForm
+								handleSubmitCreate={this.handleSubmitCreate}
+							/>
+						</div>
+
+						{/* EVENT LIST */}
+						<div className="col-md-8 col-xs-12">
 						Event list
+						</div>
 					</div>
-				</div>
-			</main>
-		</>
-	);
-};
+				</main>
+			</>
+		);
+	}
+}
+
+
 
 export default Home;
