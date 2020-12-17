@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import {eachDayOfInterval} from "date-fns";
+import {eachDayOfInterval, format} from "date-fns";
 
 import {createDayArray} from "../../utils";
 
