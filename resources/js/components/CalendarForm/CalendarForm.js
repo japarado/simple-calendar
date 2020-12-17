@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import {differenceInCalendarDays, eachDayOfInterval} from "date-fns";
+import {eachDayOfInterval} from "date-fns";
 
 import {createDayArray} from "../../utils";
 
@@ -30,9 +30,10 @@ const CalendarForm = (props) =>
 			}
 			return day;
 		});
-			setDays(availableDays);
+		setDays(availableDays);
 	}, [startDate, endDate]);
 
+	// Handlers
 	const handleUpdateStartDate = (date) => 
 	{
 		setStartDate(date);
@@ -56,14 +57,22 @@ const CalendarForm = (props) =>
 		setDays(updatedDays);
 	};
 
-	const assignAvailableDays = (date) => 
+	const handleSubmit = (e) => 
 	{
+		const selectedDays = days.filter((day) => day.checked).map((day) => day.value);
+		console.log(selectedDays);
+		const event = {
+			name: name,
+			description: description,
+			startDate,
+			endDate,
+		};
+		props.handleSubmitCreate(event, e);
 	};
-
 
 	return (
 		<>
-			<form onSubmit={props.handleSubmitCreate}>
+			<form onSubmit={handleSubmit}>
 				<div className="form-row">
 					<div className="form-group col-md-12">
 						<label htmlFor="event-name">Event Name</label>
