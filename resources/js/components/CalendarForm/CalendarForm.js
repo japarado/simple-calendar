@@ -10,9 +10,9 @@ import {createDayArray} from "../../utils";
 const CalendarForm = (props) => 
 {
 	const [name, setName] = useState("Sample Event");
-	const [description, setDescription] = useState("");
+	const [description, setDescription] = useState("This is the best event there is!");
 	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date().setDate(new Date().getDate() + 5));
+	const [endDate, setEndDate] = useState(new Date(2020, 12, 17));
 	const [days, setDays] = useState(createDayArray());
 
 	useEffect(() => 
@@ -63,7 +63,9 @@ const CalendarForm = (props) =>
 		const event = {
 			name,
 			description,
-			dates: []
+			dates: [],
+			startDate,
+			endDate
 		};
 
 		eachDayOfInterval({start: startDate, end: endDate}).forEach((date) => 
@@ -113,7 +115,7 @@ const CalendarForm = (props) =>
 							<DatePicker
 								selected={startDate}
 								onChange={(date) => handleUpdateStartDate(date)}
-								dateFormat="dd MMMM yyyy"
+								dateFormat="dd MMMM yyyy - E"
 								maxDate={endDate}
 								className="form-control"
 								id="start-date"
@@ -127,10 +129,10 @@ const CalendarForm = (props) =>
 							<DatePicker
 								selected={endDate}
 								onChange={(date) => handleUpdateEndDate(date)}
-								dateFormat="dd MMMM yyyy"
+								dateFormat="dd MMMM yyyy - E"
 								minDate={startDate}
 								className="form-control"
-								id="start-date"
+								id="end-date"
 							/>
 						</div>
 					</div>
