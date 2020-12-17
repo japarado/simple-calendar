@@ -2,11 +2,26 @@ import React, {useState} from "react";
 
 import Navbar from "../../components/Navbar/Navbar";
 import CalendarForm from "../../components/CalendarForm/CalendarForm";
+import {createDayArray} from "../../utils";
 
 const Home = () => 
 {
 	const [startDate, setStartDate] = useState(new Date());
 	const [endDate, setEndDate] = useState(new Date());
+	const [days, setDays] = useState(createDayArray());
+
+	function handleUpdateDay(updatedDay) 
+	{
+		const days = days.map((day) => 
+		{
+			if(day.label === updatedDay.label) 
+			{
+				day.value = updatedDay.value;
+			}
+			return day;
+		});
+		setDays(days);
+	}
 
 	return (
 		<>
@@ -20,6 +35,8 @@ const Home = () =>
 							setStartDate={setStartDate}
 							endDate={endDate}
 							setEndDate={setEndDate}
+							days={days}
+							handleUpdateDay={handleUpdateDay}
 						/>
 					</div>
 
@@ -32,5 +49,6 @@ const Home = () =>
 		</>
 	);
 };
+
 
 export default Home;

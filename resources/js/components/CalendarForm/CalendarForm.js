@@ -20,6 +20,16 @@ const CalendarForm = (props) =>
 			</div>
 
 			<div className="form-row">
+				<div className="form-group col-md-12">
+					<label htmlFor="description">Description</label>
+					<textarea
+						className="form-control"
+						id="description"
+						name="description"/>
+				</div>
+			</div>
+
+			<div className="form-row">
 				<div className="form-group col-md-6">
 					<div className="d-flex flex-column">
 						<label htmlFor="start-date">Start Date</label>
@@ -49,84 +59,103 @@ const CalendarForm = (props) =>
 				</div>
 
 				<div className="form-group">
-					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="checkbox"
-							name="sunday"
-							id="sunday"
-							value="0"  />
-						<label
-							className="form-check-label"
-							htmlFor="sunday">Sun</label>
-					</div>
-					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="checkbox"
-							name="sunday"
-							id="sunday"
-							value="0"  />
-						<label
-							className="form-check-label"
-							htmlFor="sunday">Sun</label>
-					</div>
-					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="checkbox"
-							name="sunday"
-							id="sunday"
-							value="0"  />
-						<label
-							className="form-check-label"
-							htmlFor="sunday">Sun</label>
-					</div>
-					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="checkbox"
-							name="sunday"
-							id="sunday"
-							value="0"  />
-						<label
-							className="form-check-label"
-							htmlFor="sunday">Sun</label>
-					</div>
-					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="checkbox"
-							name="sunday"
-							id="sunday"
-							value="0"  />
-						<label
-							className="form-check-label"
-							htmlFor="sunday">Sun</label>
-					</div>
-					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="checkbox"
-							name="sunday"
-							id="sunday"
-							value="0"  />
-						<label
-							className="form-check-label"
-							htmlFor="sunday">Sun</label>
-					</div>
-					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="checkbox"
-							name="sunday"
-							id="sunday"
-							value="0"  />
-						<label
-							className="form-check-label"
-							htmlFor="sunday">Sun</label>
-					</div>
+					{props.days.map((day) => (
+						<div
+							className="form-check form-check-inline"
+							key={day.label}>
+							<input
+								className="form-check-input"
+								type="checkbox"
+								id={day.label}
+								name={day.label}
+								value={day.value}
+							/>
+							<label
+								className="form-check-label"
+								htmlFor="sunday">{day.label}</label>
+						</div>
+					))}
 				</div>
+				{/* <div className="form-group"> */}
+				{/* 	<div className="form-check form-check-inline"> */}
+				{/* 		<input */}
+				{/* 			className="form-check-input" */}
+				{/* 			type="checkbox" */}
+				{/* 			name="sunday" */}
+				{/* 			id="sunday" */}
+				{/* 			value="0"  /> */}
+				{/* 		<label */}
+				{/* 			className="form-check-label" */}
+				{/* 			htmlFor="sunday">Sun</label> */}
+				{/* 	</div> */}
+				{/* 	<div className="form-check form-check-inline"> */}
+				{/* 		<input */}
+				{/* 			className="form-check-input" */}
+				{/* 			type="checkbox" */}
+				{/* 			name="sunday" */}
+				{/* 			id="sunday" */}
+				{/* 			value="0"  /> */}
+				{/* 		<label */}
+				{/* 			className="form-check-label" */}
+				{/* 			htmlFor="sunday">Sun</label> */}
+				{/* 	</div> */}
+				{/* 	<div className="form-check form-check-inline"> */}
+				{/* 		<input */}
+				{/* 			className="form-check-input" */}
+				{/* 			type="checkbox" */}
+				{/* 			name="sunday" */}
+				{/* 			id="sunday" */}
+				{/* 			value="0"  /> */}
+				{/* 		<label */}
+				{/* 			className="form-check-label" */}
+				{/* 			htmlFor="sunday">Sun</label> */}
+				{/* 	</div> */}
+				{/* 	<div className="form-check form-check-inline"> */}
+				{/* 		<input */}
+				{/* 			className="form-check-input" */}
+				{/* 			type="checkbox" */}
+				{/* 			name="sunday" */}
+				{/* 			id="sunday" */}
+				{/* 			value="0"  /> */}
+				{/* 		<label */}
+				{/* 			className="form-check-label" */}
+				{/* 			htmlFor="sunday">Sun</label> */}
+				{/* 	</div> */}
+				{/* 	<div className="form-check form-check-inline"> */}
+				{/* 		<input */}
+				{/* 			className="form-check-input" */}
+				{/* 			type="checkbox" */}
+				{/* 			name="sunday" */}
+				{/* 			id="sunday" */}
+				{/* 			value="0"  /> */}
+				{/* 		<label */}
+				{/* 			className="form-check-label" */}
+				{/* 			htmlFor="sunday">Sun</label> */}
+				{/* 	</div> */}
+				{/* 	<div className="form-check form-check-inline"> */}
+				{/* 		<input */}
+				{/* 			className="form-check-input" */}
+				{/* 			type="checkbox" */}
+				{/* 			name="sunday" */}
+				{/* 			id="sunday" */}
+				{/* 			value="0"  /> */}
+				{/* 		<label */}
+				{/* 			className="form-check-label" */}
+				{/* 			htmlFor="sunday">Sun</label> */}
+				{/* 	</div> */}
+				{/* 	<div className="form-check form-check-inline"> */}
+				{/* 		<input */}
+				{/* 			className="form-check-input" */}
+				{/* 			type="checkbox" */}
+				{/* 			name="sunday" */}
+				{/* 			id="sunday" */}
+				{/* 			value="0" */}
+				{/* 		/> */}
+				{/* 		<label */}
+				{/* 			className="form-check-label" */}
+				{/* 			htmlFor="sunday">Sun</label> */}
+				{/* 	</div> */}
+				{/* </div> */}
 
 			</div>
 		</>
