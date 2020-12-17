@@ -11,6 +11,8 @@ class EventDate extends Model
 {
     use HasFactory, SoftDeletes;
 
+	protected $table = 'event_date';
+
 	protected $fillable = [
 		'date',
 		'event_id'
