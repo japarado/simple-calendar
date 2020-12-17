@@ -4,12 +4,14 @@ import Navbar from "../../components/Navbar/Navbar";
 import CalendarForm from "../../components/CalendarForm/CalendarForm";
 import Calendar from "../../components/Calendar/Calendar";
 
+import {store} from "../../services/eventService";
+
 class Home extends Component
 {
-	handleSubmitCreate = (event, e) => 
+	handleSubmitCreate = async (event, e) => 
 	{
 		e.preventDefault();
-		console.log(event);
+		const response = await store(event);
 	}
 
 	render() 
