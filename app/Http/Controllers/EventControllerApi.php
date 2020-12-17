@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventDate;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
+use DateTimeZone;
 use Illuminate\Http\Request;
 
 class EventControllerApi extends Controller
@@ -14,13 +18,13 @@ class EventControllerApi extends Controller
      */
     public function index()
     {
-		$events = Event::with('dates')->get();
+        $events = Event::with('dates')->get();
 
-		$context = [
-			'events' => $events
-		];
+        $context = [
+            'events' => $events
+        ];
 
-		return response()->json($context);
+        return response()->json($context);
     }
 
     /**
@@ -41,7 +45,31 @@ class EventControllerApi extends Controller
      */
     public function store(Request $request)
     {
-		$event = $request->input('event');
+		$name = $request->input('name');
+		$desc = $request->input('description');
+		$start_date = $request->input('startDate');
+		$end_date = $request->input('endDate');
+		$dates = $request->input('dates');
+
+		$event = Event::create([
+			'name' => $name,
+			'description' => $desc,
+		]);
+
+		$event_dates = array_map(function($date) {
+			return new EventDate(['date' => $date]);
+		}, $dates);
+
+		$event->dates()->saveMany($event_dates);
+
+        $context = [
+			'name' => $name,
+			'desc' => $desc,
+			'start_date' => $start_date,
+			'end_date' => $end_date,
+			'dates' => $dates,
+        ];
+        return response()->json($context);
     }
 
     /**
@@ -52,7 +80,6 @@ class EventControllerApi extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
