@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Event;
+use App\Http\Controllers\EventControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 /*     return $request->user(); */
 /* }); */
 
-Route::resource('events', Event::class, ['as' => 'api'])->parameter('events', 'id');
+Route::resource('events', EventControllerApi::class, ['as' => 'api'])->parameter('events', 'id');
