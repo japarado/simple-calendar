@@ -9,10 +9,10 @@ import {createDayArray} from "../../utils";
 
 const CalendarForm = (props) => 
 {
-	const [name, setName] = useState("");
+	const [name, setName] = useState("Sample Event");
 	const [description, setDescription] = useState("");
 	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(new Date().setDate(new Date().getDate() + 5));
 	const [days, setDays] = useState(createDayArray());
 
 	useEffect(() => 
@@ -22,7 +22,7 @@ const CalendarForm = (props) =>
 		{
 			if(eventDays.includes(day.value))
 			{
-				day.isAvailable = true;
+				day.isAvailable = day.checked = true;
 			}
 			else 
 			{
@@ -60,13 +60,19 @@ const CalendarForm = (props) =>
 	const handleSubmit = (e) => 
 	{
 		const selectedDays = days.filter((day) => day.checked).map((day) => day.value);
-		console.log(selectedDays);
 		const event = {
-			name: name,
-			description: description,
-			startDate,
-			endDate,
+			name,
+			description,
+			dates: []
 		};
+
+		eachDayOfInterval({start: startDate, end: endDate}).forEach((date) => 
+		{
+			if(selectedDays.includes(date.getDay()))
+			{
+				event.dates.push(date);
+			}
+		});
 		props.handleSubmitCreate(event, e);
 	};
 
