@@ -42,7 +42,6 @@ class EventControllerApi extends Controller
     public function store(Request $request)
     {
 		$event = $request->input('event');
-		dd($event);
     }
 
     /**
