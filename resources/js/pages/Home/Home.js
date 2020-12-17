@@ -2,12 +2,14 @@ import React, {Component} from "react";
 
 import Navbar from "../../components/Navbar/Navbar";
 import CalendarForm from "../../components/CalendarForm/CalendarForm";
+import Calendar from "../../components/Calendar/Calendar";
 
 class Home extends Component
 {
 	handleSubmitCreate = (event, e) => 
 	{
 		e.preventDefault();
+		console.log(event);
 	}
 
 	render() 
@@ -16,7 +18,7 @@ class Home extends Component
 			<>
 				<Navbar/>
 
-				<main className="container-fluid pt-5">
+				<main className="container-fluid py-5">
 					<div className="row">
 						<div className="col-md-4 col-xs-12">
 							<CalendarForm
@@ -26,7 +28,7 @@ class Home extends Component
 
 						{/* EVENT LIST */}
 						<div className="col-md-8 col-xs-12">
-						Event list
+							<Calendar/>
 						</div>
 					</div>
 				</main>

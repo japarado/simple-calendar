@@ -9,10 +9,10 @@ import {createDayArray} from "../../utils";
 
 const CalendarForm = (props) => 
 {
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
+	const [name, setName] = useState("Sample Event");
+	const [description, setDescription] = useState("This is the best event there is!");
 	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(new Date(2020, 12, 17));
 	const [days, setDays] = useState(createDayArray());
 
 	useEffect(() => 
@@ -22,7 +22,7 @@ const CalendarForm = (props) =>
 		{
 			if(eventDays.includes(day.value))
 			{
-				day.isAvailable = true;
+				day.isAvailable = day.checked = true;
 			}
 			else 
 			{
@@ -60,13 +60,21 @@ const CalendarForm = (props) =>
 	const handleSubmit = (e) => 
 	{
 		const selectedDays = days.filter((day) => day.checked).map((day) => day.value);
-		console.log(selectedDays);
 		const event = {
-			name: name,
-			description: description,
+			name,
+			description,
+			dates: [],
 			startDate,
-			endDate,
+			endDate
 		};
+
+		eachDayOfInterval({start: startDate, end: endDate}).forEach((date) => 
+		{
+			if(selectedDays.includes(date.getDay()))
+			{
+				event.dates.push(date);
+			}
+		});
 		props.handleSubmitCreate(event, e);
 	};
 
@@ -107,7 +115,7 @@ const CalendarForm = (props) =>
 							<DatePicker
 								selected={startDate}
 								onChange={(date) => handleUpdateStartDate(date)}
-								dateFormat="dd MMMM yyyy"
+								dateFormat="dd MMMM yyyy - E"
 								maxDate={endDate}
 								className="form-control"
 								id="start-date"
@@ -121,10 +129,10 @@ const CalendarForm = (props) =>
 							<DatePicker
 								selected={endDate}
 								onChange={(date) => handleUpdateEndDate(date)}
-								dateFormat="dd MMMM yyyy"
+								dateFormat="dd MMMM yyyy - E"
 								minDate={startDate}
 								className="form-control"
-								id="start-date"
+								id="end-date"
 							/>
 						</div>
 					</div>
