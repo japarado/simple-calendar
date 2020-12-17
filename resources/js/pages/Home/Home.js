@@ -9,6 +9,7 @@ const Home = () =>
 	const [startDate, setStartDate] = useState(new Date());
 	const [endDate, setEndDate] = useState(new Date());
 	const [days, setDays] = useState(createDayArray());
+	const [events, setEvents] = useState([]);
 
 	function handleUpdateDay(updatedDay) 
 	{
