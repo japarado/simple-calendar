@@ -14,7 +14,7 @@ class EventControllerApi extends Controller
      */
     public function index()
     {
-		$events = Event::with('dates')->all();
+		$events = Event::with('dates')->get();
 
 		$context = [
 			'events' => $events
