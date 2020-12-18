@@ -4,12 +4,16 @@ import Navbar from "../../components/Navbar/Navbar";
 import CalendarForm from "../../components/CalendarForm/CalendarForm";
 import Calendar from "../../components/Calendar/Calendar";
 
+import Modal from "react-bootstrap/Modal";
+
 import {store, index} from "../../services/eventService";
 
 class Home extends Component
 {
 	state = {
-		events: []
+		events: [],
+		isModalOpen: false,
+		event: {}
 	};
 
 	async componentDidMount()
@@ -85,14 +89,36 @@ class Home extends Component
 	{
 		console.log(arg.event.extendedProps.id);
 		console.log(arg.event.extendedProps.description);
+		console.log(arg.event.start)
+		console.log(arg.event.end)
 	}
 
+	handleHideModal = () => this.setState({isModalOpen: false});
+
+	handleShowModal = () => this.setState({isModalOpen: true});
 
 	render() 
 	{
 		return (
 			<>
 				<Navbar/>
+
+				<button onClick={this.handleShowModal}></button>
+				<Modal
+					show={this.state.isModalOpen}
+					onHide={this.handleHideModal}
+					scrollable={true}
+					backdrop={true}
+				>
+					<Modal.Header>
+					</Modal.Header>
+
+					<Modal.Body>
+					</Modal.Body>
+
+					<Modal.Footer>
+					</Modal.Footer>
+				</Modal>
 
 				<main className="container-fluid py-5">
 					<div className="row">
