@@ -81,6 +81,12 @@ class Home extends Component
 		await this.refreshEvents();
 	}
 
+	handleClickDate = (arg) => 
+	{
+		console.log(arg.event.extendedProps.id)
+		console.log(arg.event.extendedProps.description)
+	}
+
 
 	render() 
 	{
@@ -100,6 +106,7 @@ class Home extends Component
 						<div className="col-md-8 col-xs-12">
 							<Calendar
 								events={this.state.events}
+								handleClickDate={this.handleClickDate}
 							/>
 						</div>
 					</div>
