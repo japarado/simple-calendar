@@ -33,17 +33,6 @@ const CalendarForm = (props) =>
 		setDays(availableDays);
 	}, [startDate, endDate]);
 
-	// Handlers
-	const handleUpdateStartDate = (date) => 
-	{
-		setStartDate(date);
-	};
-
-	const handleUpdateEndDate = (date) => 
-	{
-		setEndDate(date);
-	};
-
 	const handleCheckDay = (e) => 
 	{
 		const updatedDays = days.map((day) => 
@@ -114,7 +103,7 @@ const CalendarForm = (props) =>
 							<label htmlFor="start-date">Start Date</label>
 							<DatePicker
 								selected={startDate}
-								onChange={(date) => handleUpdateStartDate(date)}
+								onChange={(date) => setStartDate(date)}
 								dateFormat="dd MMMM yyyy - E"
 								maxDate={endDate}
 								className="form-control"
@@ -128,7 +117,7 @@ const CalendarForm = (props) =>
 							<label htmlFor="start-date">End Date</label>
 							<DatePicker
 								selected={endDate}
-								onChange={(date) => handleUpdateEndDate(date)}
+								onChange={(date) => setEndDate(date)}
 								dateFormat="dd MMMM yyyy - E"
 								minDate={startDate}
 								className="form-control"
