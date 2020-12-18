@@ -103,7 +103,6 @@ class Home extends Component
 			<>
 				<Navbar/>
 
-				<button onClick={this.handleShowModal}></button>
 				<Modal
 					show={this.state.isModalOpen}
 					onHide={this.handleHideModal}
