@@ -61,7 +61,14 @@ class Home extends Component
 		{
 			event.dates.forEach((date) => 
 			{
-				processedEvents.push({title: event.name, date: date.date});
+				processedEvents.push({
+					title: event.name,
+					date: date.date,
+					extendedProps: {
+						description: event.description,
+						id: event.id
+					}
+				});
 			});
 		});
 		return processedEvents;
