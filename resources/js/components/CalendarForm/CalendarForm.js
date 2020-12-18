@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import {eachDayOfInterval} from "date-fns";
+import {eachDayOfInterval, format} from "date-fns";
 
 import {createDayArray} from "../../utils";
 
@@ -11,8 +11,8 @@ const CalendarForm = (props) =>
 {
 	const [name, setName] = useState("Sample Event");
 	const [description, setDescription] = useState("This is the best event there is!");
-	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date(2020, 12, 17));
+	const [startDate, setStartDate] = useState(new Date(new Date().setHours(0,0,0,0)));
+	const [endDate, setEndDate] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 5));
 	const [days, setDays] = useState(createDayArray());
 
 	useEffect(() => 

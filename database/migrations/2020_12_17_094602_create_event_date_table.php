@@ -15,7 +15,7 @@ class CreateEventDateTable extends Migration
     {
         Schema::create('event_date', function (Blueprint $table) {
             $table->id();
-			$table->date('date');
+			$table->dateTime('date');
 			$table->unsignedBigInteger('event_id');
             $table->timestamps();
 			$table->softDeletes();
