@@ -10,6 +10,7 @@ const Calendar = (props) =>
 			plugins={[DayGridPlugin]}
 			initialView="dayGridMonth"
 			events={props.events}
+			displayEventTime={false}
 		/>
 	);
 };
