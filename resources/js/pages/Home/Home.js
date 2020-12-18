@@ -83,8 +83,8 @@ class Home extends Component
 
 	handleClickDate = (arg) => 
 	{
-		console.log(arg.event.extendedProps.id)
-		console.log(arg.event.extendedProps.description)
+		console.log(arg.event.extendedProps.id);
+		console.log(arg.event.extendedProps.description);
 	}
 
 
