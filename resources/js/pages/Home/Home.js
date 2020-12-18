@@ -4,15 +4,61 @@ import Navbar from "../../components/Navbar/Navbar";
 import CalendarForm from "../../components/CalendarForm/CalendarForm";
 import Calendar from "../../components/Calendar/Calendar";
 
-import {store} from "../../services/eventService";
+import {store, index} from "../../services/eventService";
 
 class Home extends Component
 {
+	state = {
+		events: []
+	};
+
+	async componentDidMount()
+	{
+		this.refreshEvents();
+	}
+
+	async fetchEvents()
+	{
+		let events = [];
+		try 
+		{
+			events = await index();
+		}
+		catch(e)
+		{
+			console.log(e);
+			alert("Error fetching events");
+		}
+		return events;
+	}
+
+	async refreshEvents()
+	{
+		const res = await this.fetchEvents();
+		const processedEvents = this.processEvents(res.data.events);
+		this.setState({events: processedEvents});
+	}
+
+	processEvents(events)
+	{
+		const processedEvents = [];
+		events.forEach((event) => 
+		{
+			event.dates.forEach((date) => 
+			{
+				processedEvents.push({title: event.name, date: date.date});
+			});
+		});
+		return processedEvents;
+	}
+
 	handleSubmitCreate = async (event, e) => 
 	{
 		e.preventDefault();
 		const response = await store(event);
+		await this.refreshEvents();
 	}
+
 
 	render() 
 	{
@@ -30,7 +76,9 @@ class Home extends Component
 
 						{/* EVENT LIST */}
 						<div className="col-md-8 col-xs-12">
-							<Calendar/>
+							<Calendar
+								events={this.state.events}
+							/>
 						</div>
 					</div>
 				</main>
