@@ -77,7 +77,7 @@ class Home extends Component
 	handleSubmitCreate = async (event, e) => 
 	{
 		e.preventDefault();
-		const response = await store(event);
+		await store(event);
 		await this.refreshEvents();
 	}
 
