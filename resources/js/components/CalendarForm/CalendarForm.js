@@ -11,7 +11,7 @@ const CalendarForm = (props) =>
 {
 	const [name, setName] = useState("Sample Event");
 	const [description, setDescription] = useState("This is the best event there is!");
-	const [startDate, setStartDate] = useState(new Date());
+	const [startDate, setStartDate] = useState(new Date(new Date().setHours(0,0,0,0)));
 	const [endDate, setEndDate] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 5));
 	const [days, setDays] = useState(createDayArray());
 
