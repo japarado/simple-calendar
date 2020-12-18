@@ -80,6 +80,15 @@ class EventControllerApi extends Controller
      */
     public function show($id)
     {
+		$event = Event::with(['dates' => function($query) {
+			$query->orderBy('date', 'ASC');
+		}])->find($id);
+
+		$context = [
+			'event' => $event
+		];
+
+		return response()->json($context);
     }
 
     /**
