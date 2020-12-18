@@ -32,6 +32,21 @@ class Home extends Component
 		return events;
 	}
 
+	async storeEvent(event)
+	{
+		let returnValue = undefined;
+		try 
+		{
+			returnValue = await store(event);
+		}
+		catch(e)
+		{
+			console.log(e);
+			alert("Error saving event");
+		}
+		return returnValue;
+	}
+
 	async refreshEvents()
 	{
 		const res = await this.fetchEvents();
