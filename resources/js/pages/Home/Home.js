@@ -121,6 +121,8 @@ class Home extends Component
 				{this.state.isModalOpen ? 
 					(
 						<EditModal 
+							eventId={this.state.event.eventId}
+							dateId={this.state.event.dateId}
 							name={this.state.event.name}
 							description={this.state.event.description}
 							eventDate={this.state.event.eventDate}
