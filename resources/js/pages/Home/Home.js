@@ -10,6 +10,12 @@ import {store, index} from "../../services/eventService";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+/**
+ * @typedef {Object} ClickEvent
+ * @typedef {Object} ChangeEvent
+ * @typedef {Object} SubmitEvent
+ */
+
 class Home extends Component
 {
 	state = {
@@ -23,6 +29,11 @@ class Home extends Component
 		this.refreshEvents();
 	}
 
+	/**
+	 * Retrieves and returns all events via the event service module
+	 *
+	 * @returns {Object[]} Events
+	 */
 	async fetchEvents()
 	{
 		let events = [];
@@ -38,6 +49,12 @@ class Home extends Component
 		return events;
 	}
 
+	/**
+	 * Accepts and saves an event via the event service module
+	 *
+	 * @param {Object} Event
+	 * @returns {Promise<Object>} Saved event
+	 */
 	async storeEvent(event)
 	{
 		let returnValue = undefined;
@@ -53,6 +70,9 @@ class Home extends Component
 		return returnValue;
 	}
 
+	/**
+	 * Retrieves all events via the event service module and sets it to the state 
+	 */
 	async refreshEvents()
 	{
 		const res = await this.fetchEvents();
@@ -60,6 +80,12 @@ class Home extends Component
 		this.setState({events: processedEvents});
 	}
 
+	/**
+	 * Readies the event objects for usage in the FullCalendar component
+	 *
+	 * @param {Object[]} events
+	 * @returns {Object[]} Events
+	 */
 	processEvents(events)
 	{
 		const processedEvents = [];
@@ -84,6 +110,12 @@ class Home extends Component
 		return processedEvents;
 	}
 
+	/**
+	 * Saves the passed event object and refreshes the event list 
+	 *
+	 * @param {Object} event
+	 * @param {SubmitEvent} e
+	 */
 	handleSubmitCreate = async (event, e) => 
 	{
 		e.preventDefault();
@@ -92,12 +124,20 @@ class Home extends Component
 		await this.refreshEvents();
 	}
 
+	/**
+	 * Closes the edit modal and refreshes the event list 
+	 */
 	handleSubmitEdit = async () => 
 	{
 		this.setState({isModalOpen: false});
 		await this.refreshEvents();
 	}
 
+	/**
+	 * Opens the modal for editing an event. Fires when clicking an event on the calendar
+	 *
+	 * @param {Object} arg The event object passed by FullCalendar
+	 */
 	handleClickEvent = (arg) => 
 	{
 		const event = {
@@ -113,8 +153,14 @@ class Home extends Component
 		this.setState({isModalOpen: true, event});
 	}
 
+	/**
+	 * Hides the event edit modal 
+	 */
 	handleHideModal = () => this.setState({isModalOpen: false});
 
+	/** 
+	 * Shows the event edit modal 
+	 */
 	handleShowModal = () => this.setState({isModalOpen: true});
 
 	render() 
