@@ -14,8 +14,8 @@ import Form from "../Form/Form";
 
 const SideMenu = (props) => 
 {
-	const [name, setName] = useState("Sample Event");
-	const [description, setDescription] = useState("This is the best event there is!");
+	const [name, setName] = useState("");
+	const [description, setDescription] = useState("");
 	const [startDate, setStartDate] = useState(new Date(new Date().setHours(0,0,0,0)));
 	const [endDate, setEndDate] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 6));
 	const [days, setDays] = useState(createDayArray());
