@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 /* }); */
 
 Route::resource('events', EventControllerApi::class, ['as' => 'api'])->parameter('events', 'id');
+Route::resource('event-dates', EventDateControllerApi::class, ['as' => 'api'])->parameter('event-dates', 'id');
