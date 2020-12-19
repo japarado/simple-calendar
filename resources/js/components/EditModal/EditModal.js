@@ -5,7 +5,9 @@ import "./EditModal.scss";
 import Modal from "react-bootstrap/Modal";
 import Form from "../Form/Form";
 
-import {eachDayOfInterval} from "date-fns";
+import {toast} from 'react-toastify';
+
+import {eachDayOfInterval, format} from "date-fns";
 import {createDayArray, prettifyDate} from "../../utils";
 
 import {update, destroy as destroyEvent} from "../../services/eventService";
@@ -136,12 +138,14 @@ class EditModal extends Component
 	handleDeleteEvent = async () =>
 	{
 		await destroyEvent(this.state.eventId);
+		toast.warning(`Deleted '${this.state.name}'`);
 		await this.props.handleSubmit();
 	}
 
 	handleDeleteEventDate = async () => 
 	{
 		await destroyEventDate(this.state.dateId);
+		toast.warning(`Event '${this.props.name}' removed from ${format(this.state.eventDate, "dd MMMM yyyy - E")}`);
 		await this.props.handleSubmit();
 	}
 
