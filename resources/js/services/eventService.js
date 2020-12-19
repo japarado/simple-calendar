@@ -17,4 +17,13 @@ async function store(event)
 	return response;
 }
 
-export {index, store};
+async function update(id, event)
+{
+	event.startDate = format(event.startDate, "y-MM-dd hh:mm:ss");
+	event.endDate = format(event.endDate, "y-MM-dd hh:mm:ss");
+	event.dates = event.dates.map((date) => format(date, "y-MM-dd hh:mm:ss"));
+	const response = await apiservice.patch(`/events/${id}`, event);
+	return response;
+}
+
+export {index, store, update};
