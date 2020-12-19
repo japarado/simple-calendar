@@ -134,6 +134,7 @@ class Home extends Component
 							dates={this.state.event.dates}
 							show={this.state.isModalOpen}
 							onHide={this.handleHideModal}
+							handleSubmit={this.handleSubmitEdit}
 						/>
 					) : null
 				}
