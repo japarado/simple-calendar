@@ -4,7 +4,7 @@
 
 ## Demo 
 I currently have a deployed version of this site courtesy of Laravel Forge and AWS. I won't be putting the URL here until it has been examined.
-In the meantime, you can [email me](justin.parado.personal@gmail.com) (justin.parado.personal@gmail.com) and I'll make sure to send you the 
+In the meantime, you can [email me](mailto:justin.parado.personal@gmail.com?subject=SimpleCalendarLink) (justin.parado.personal@gmail.com) and I'll make sure to send you the 
 link once I get the go ahead.
 
 ## About
