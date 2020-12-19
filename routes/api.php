@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventControllerApi;
+use App\Http\Controllers\EventDateControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
