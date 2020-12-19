@@ -148,6 +148,13 @@ class EventControllerApi extends Controller
      */
     public function destroy($id)
     {
-        //
+		$event = Event::find($id);
+		$event->delete();
+
+		$context = [
+			'event' => $event
+		];
+
+		return response()->json($context);
     }
 }
