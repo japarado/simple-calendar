@@ -89,7 +89,7 @@ const Form = (props) =>
 				</div>
 				<button
 					className="btn btn-primary"
-					type="submit">Submit</button>
+					type="submit">{props.submitText ? props.submitText : "Submit"}</button>
 			</form>
 		</>
 	);
