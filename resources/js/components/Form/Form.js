@@ -18,6 +18,7 @@ const Form = (props) =>
 							name="event-name"
 							value={props.name}
 							onChange={(e) => props.setName(e.target.value)}
+							placeholder="Dinner Party"
 							required/>
 					</div>
 				</div>
@@ -29,6 +30,7 @@ const Form = (props) =>
 							className="form-control"
 							id="description"
 							name="description"
+							placeholder="Get together with Fran and Co. I've been assigned to bring the drinks."
 							value={props.description}
 							onChange={(e) => props.setDescription(e.target.value)}
 						/>
