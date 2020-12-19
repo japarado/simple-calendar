@@ -3,9 +3,12 @@ import React, {Component} from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import Calendar from "../../components/Calendar/Calendar";
+import EditModal from "../../components/EditModal/EditModal";
 
 import {store, index} from "../../services/eventService";
-import EditModal from "../../components/EditModal/EditModal";
+
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Home extends Component
 {
@@ -85,6 +88,7 @@ class Home extends Component
 	{
 		e.preventDefault();
 		await store(event);
+		toast.success(`Created '${event.name}'`);
 		await this.refreshEvents();
 	}
 
@@ -153,6 +157,7 @@ class Home extends Component
 							/>
 						</div>
 					</div>
+					<ToastContainer newestOnTop/>
 				</main>
 			</>
 		);
