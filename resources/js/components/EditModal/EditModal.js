@@ -8,7 +8,8 @@ import Form from "../Form/Form";
 import {eachDayOfInterval} from "date-fns";
 import {createDayArray, prettifyDate} from "../../utils";
 
-import {update} from "../../services/eventService";
+import {update, destroy as destroyEvent} from "../../services/eventService";
+import {destroy as destroyEventDate} from "../../services/eventDateService";
 
 class EditModal extends Component
 {
@@ -129,7 +130,19 @@ class EditModal extends Component
 			}
 		});
 		await update(this.state.eventId, event);
-		await this.props.handleSubmit(e);
+		await this.props.handleSubmit();
+	}
+
+	handleDeleteEvent = async () =>
+	{
+		await destroyEvent(this.state.eventId);
+		await this.props.handleSubmit();
+	}
+
+	handleDeleteEventDate = async () => 
+	{
+		await destroyEventDate(this.state.dateId);
+		await this.props.handleSubmit();
 	}
 
 	render()
@@ -138,7 +151,7 @@ class EditModal extends Component
 			<Modal 
 				show={this.props.show} 
 				onHide={this.props.onHide}
-				scrollable={true} 
+				scrollable={false} 
 				backdrop={true} 
 			> 
 				<Modal.Header> 
@@ -150,26 +163,38 @@ class EditModal extends Component
 
 				{/* TODO: Unify all these props into a single object */}
 				<Modal.Body> 
-					<Form
-						name={this.state.name}
-						description={this.state.description}
-						startDate={this.state.startDate}
-						endDate={this.state.endDate}
-						days={this.state.days}
-						setName={this.handleUpdateName}
-						setDescription={this.handleUpdateDescription}
-						setStartDate={this.handleUpdateStartDate}
-						setEndDate={this.handleUpdateEndDate}
-						handleSubmit={this.handleSubmit}
-						handleCheckDay={this.handleCheckDay}
-						submitText={"Save Changes"}
-					/>
+					<div className="mb-3">
+						<Form
+							name={this.state.name}
+							description={this.state.description}
+							startDate={this.state.startDate}
+							endDate={this.state.endDate}
+							days={this.state.days}
+							setName={this.handleUpdateName}
+							setDescription={this.handleUpdateDescription}
+							setStartDate={this.handleUpdateStartDate}
+							setEndDate={this.handleUpdateEndDate}
+							handleSubmit={this.handleSubmit}
+							handleCheckDay={this.handleCheckDay}
+							submitText={"Save Changes"}
+						/>
+					</div>
 				</Modal.Body> 
 
 				<Modal.Footer> 
-					<button
-						className="btn btn-secondary"
-						onClick={this.props.onHide}>Cancel</button>
+					<div className="d-flex flex-column">
+						<button
+							className="btn btn-secondary"
+							onClick={this.props.onHide}>Cancel</button>
+						<div className="flex mt-5">
+							<button
+								className="btn btn-warning mr-5"
+								onClick={this.handleDeleteEventDate}>Delete this event date</button>
+							<button
+								className="btn btn-danger"
+								onClick={this.handleDeleteEvent}>Delete this Event</button>
+						</div>
+					</div>
 				</Modal.Footer> 
 			</Modal> 
 		);

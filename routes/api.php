@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventControllerApi;
+use App\Http\Controllers\EventDateControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ use Illuminate\Support\Facades\Route;
 /* }); */
 
 Route::resource('events', EventControllerApi::class, ['as' => 'api'])->parameter('events', 'id');
+Route::resource('event-dates', EventDateControllerApi::class, ['as' => 'api'])->parameter('event-dates', 'id');
