@@ -26,4 +26,10 @@ async function update(id, event)
 	return response;
 }
 
-export {index, store, update};
+async function destroy(id)
+{
+	const response = await apiservice.delete(`/events/${id}`);
+	return response;
+}
+
+export {index, store, update, destroy};
