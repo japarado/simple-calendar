@@ -80,6 +80,15 @@ class EventControllerApi extends Controller
      */
     public function show($id)
     {
+		$event = Event::with(['dates' => function($query) {
+			$query->orderBy('date', 'ASC');
+		}])->find($id);
+
+		$context = [
+			'event' => $event
+		];
+
+		return response()->json($context);
     }
 
     /**
@@ -102,7 +111,33 @@ class EventControllerApi extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		$name = $request->input('name');
+		$desc = $request->input('description');
+		$start_date = $request->input('startDate');
+		$end_date = $request->input('endDate');
+		$dates = $request->input('dates');
+
+		$event = Event::with('dates')->find($id);
+
+		$event_dates = array_map(function($date) {
+			return new EventDate(['date' => $date]);
+		}, $dates);
+
+		$event->name = $name;
+		$event->description = $desc;
+		$event->save();
+
+		$event->dates()->delete();
+		$event->dates()->saveMany($event_dates);
+
+		$context = [
+			'event' => $event,
+			'start_date' => $start_date,
+			'end_date' => $end_date,
+			'dates' => $dates
+		];
+
+		return response()->json($context);
     }
 
     /**

@@ -1,16 +1,18 @@
 import React from "react";
 
 import FullCalendar from "@fullcalendar/react";
-import DayGridPlugin from "@fullcalendar/daygrid";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
 const Calendar = (props) => 
 {
 	return(
 		<FullCalendar
-			plugins={[DayGridPlugin]}
+			plugins={[dayGridPlugin, interactionPlugin]}
 			initialView="dayGridMonth"
 			events={props.events}
 			displayEventTime={false}
+			eventClick={props.handleClickEvent}
 		/>
 	);
 };
