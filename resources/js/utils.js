@@ -1,3 +1,5 @@
+import {format} from "date-fns";
+
 function createDayArray() 
 {
 	const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -9,4 +11,10 @@ function createDayArray()
 	}));
 }
 
-export {createDayArray};
+function prettifyDate(date)
+{
+	return format(date, "dd MMMM yyyy - E");
+}
+
+export {createDayArray, prettifyDate};
+
