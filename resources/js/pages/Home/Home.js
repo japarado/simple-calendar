@@ -106,11 +106,6 @@ class Home extends Component
 			dates: arg.event.extendedProps.dates.map((date) => new Date(date))
 		};
 		this.setState({isModalOpen: true, event});
-		// this.setState({isModalOpen: true});
-		// console.log(arg.event.extendedProps.id);
-		// console.log(arg.event.extendedProps.description);
-		// console.log(arg.event.start)
-		// console.log(arg.event.end)
 	}
 
 	handleHideModal = () => this.setState({isModalOpen: false});
