@@ -7,6 +7,11 @@ import {eachDayOfInterval} from "date-fns";
 import {createDayArray} from "../../utils";
 import Form from "../Form/Form";
 
+/**
+ * @typedef {Object} ChangeEvent
+ * @typedef {Object} SubmitEvent
+ */
+
 const SideMenu = (props) => 
 {
 	const [name, setName] = useState("Sample Event");
@@ -15,6 +20,11 @@ const SideMenu = (props) =>
 	const [endDate, setEndDate] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 6));
 	const [days, setDays] = useState(createDayArray());
 
+	/**
+	 * Changes the state of the checkboxes whenever the date range is udpated
+	 *
+	 * Checkboxes may become un/checked and dis/en-abled according to the selected dates
+	 */
 	useEffect(() => 
 	{
 		const eventDays = eachDayOfInterval({start: startDate, end: endDate}).map((day) => day.getDay());
@@ -33,6 +43,11 @@ const SideMenu = (props) =>
 		setDays(availableDays);
 	}, [startDate, endDate]);
 
+	/**
+	 * Handles the day states according to the changed tick boxes
+	 *
+	 * @param {Object} ChangeEvent
+	 */
 	const handleCheckDay = (e) => 
 	{
 		const updatedDays = days.map((day) => 
@@ -46,6 +61,12 @@ const SideMenu = (props) =>
 		setDays(updatedDays);
 	};
 
+	/**
+	 * Handles the submission of a new event and calls the handleSubmitCreate prop.
+	 * In this case said prop refreshes the events
+	 *
+	 * @param {Object} SubmitEvent
+	*/
 	const handleSubmit = (e) => 
 	{
 		const selectedDays = days.filter((day) => day.checked).map((day) => day.value);
