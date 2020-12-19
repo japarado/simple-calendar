@@ -132,6 +132,7 @@ class EditModal extends Component
 			}
 		});
 		await update(this.state.eventId, event);
+		toast.info(`Event '${this.state.name}' updated`);
 		await this.props.handleSubmit();
 	}
 
