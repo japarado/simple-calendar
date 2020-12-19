@@ -8,7 +8,7 @@ import {eachDayOfInterval} from "date-fns";
 import {createDayArray} from "../../utils";
 import Form from "../Form/Form";
 
-const CalendarForm = (props) => 
+const SideMenu = (props) => 
 {
 	const [name, setName] = useState("Sample Event");
 	const [description, setDescription] = useState("This is the best event there is!");
@@ -89,4 +89,4 @@ const CalendarForm = (props) =>
 	);
 };
 
-export default CalendarForm;
+export default SideMenu;

@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 
 import Navbar from "../../components/Navbar/Navbar";
-import CalendarForm from "../../components/CalendarForm/CalendarForm";
+import SideMenu from "../../components/SideMenu/SideMenu";
 import Calendar from "../../components/Calendar/Calendar";
 
-import Modal from "react-bootstrap/Modal";
-
 import {store, index} from "../../services/eventService";
+import EditModal from "../../components/EditModal/EditModal";
 
 class Home extends Component
 {
@@ -70,7 +69,11 @@ class Home extends Component
 					date: date.date,
 					extendedProps: {
 						description: event.description,
-						id: event.id
+						eventId: event.id,
+						dateId: date.id,
+						startDate: event.dates[0].date,
+						endDate: event.dates[event.dates.length - 1].date,
+						dates: event.dates.map((date) => date.date)
 					}
 				});
 			});
@@ -85,12 +88,29 @@ class Home extends Component
 		await this.refreshEvents();
 	}
 
-	handleClickDate = (arg) => 
+	handleSubmitEdit = async (event, e) => 
 	{
-		console.log(arg.event.extendedProps.id);
-		console.log(arg.event.extendedProps.description);
-		console.log(arg.event.start)
-		console.log(arg.event.end)
+		e.preventDefault();
+	}
+
+	handleClickEvent = (arg) => 
+	{
+		const event = {
+			eventDate: arg.event.start,
+			eventId: arg.event.extendedProps.eventId,
+			dateId: arg.event.extendedProps.dateId,
+			name: arg.event.title,
+			description: arg.event.extendedProps.description,
+			startDate: new Date(arg.event.extendedProps.startDate),
+			endDate: new Date(arg.event.extendedProps.endDate),
+			dates: arg.event.extendedProps.dates.map((date) => new Date(date))
+		};
+		this.setState({isModalOpen: true, event});
+		// this.setState({isModalOpen: true});
+		// console.log(arg.event.extendedProps.id);
+		// console.log(arg.event.extendedProps.description);
+		// console.log(arg.event.start)
+		// console.log(arg.event.end)
 	}
 
 	handleHideModal = () => this.setState({isModalOpen: false});
@@ -103,26 +123,25 @@ class Home extends Component
 			<>
 				<Navbar/>
 
-				<Modal
-					show={this.state.isModalOpen}
-					onHide={this.handleHideModal}
-					scrollable={true}
-					backdrop={true}
-				>
-					<Modal.Header>
-					</Modal.Header>
-
-					<Modal.Body>
-					</Modal.Body>
-
-					<Modal.Footer>
-					</Modal.Footer>
-				</Modal>
+				{this.state.isModalOpen ? 
+					(
+						<EditModal 
+							name={this.state.event.name}
+							description={this.state.event.description}
+							eventDate={this.state.event.eventDate}
+							startDate={this.state.event.startDate}
+							endDate={this.state.event.endDate}
+							dates={this.state.event.dates}
+							show={this.state.isModalOpen}
+							onHide={this.handleHideModal}
+						/>
+					) : null
+				}
 
 				<main className="container-fluid py-5">
 					<div className="row">
 						<div className="col-md-4 col-xs-12">
-							<CalendarForm
+							<SideMenu
 								handleSubmitCreate={this.handleSubmitCreate}
 							/>
 						</div>
@@ -131,7 +150,7 @@ class Home extends Component
 						<div className="col-md-8 col-xs-12">
 							<Calendar
 								events={this.state.events}
-								handleClickDate={this.handleClickDate}
+								handleClickEvent={this.handleClickEvent}
 							/>
 						</div>
 					</div>
