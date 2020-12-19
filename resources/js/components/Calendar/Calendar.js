@@ -12,7 +12,7 @@ const Calendar = (props) =>
 			initialView="dayGridMonth"
 			events={props.events}
 			displayEventTime={false}
-			eventClick={props.handleClickDate}
+			eventClick={props.handleClickEvent}
 		/>
 	);
 };
