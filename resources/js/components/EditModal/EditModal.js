@@ -13,6 +13,11 @@ import {createDayArray, prettifyDate} from "../../utils";
 import {update, destroy as destroyEvent} from "../../services/eventService";
 import {destroy as destroyEventDate} from "../../services/eventDateService";
 
+/**
+ * @typedef {Object} ChangeEvent
+ * @typedef {Object} SubmitEvent
+ */
+
 class EditModal extends Component
 {
 	state = {
@@ -42,6 +47,9 @@ class EditModal extends Component
 		}, () => this.setDayStates());
 	}
 
+	/**
+	 * Un/checks and dis/en-ables the day checkboxes according to the event dates 
+	 */
 	setDayStates()
 	{
 		const selectedEventDays = Array.from(new Set(this.state.dates.map((date) => date.getDay())));
@@ -99,6 +107,11 @@ class EditModal extends Component
 
 	handleUpdateEndDate = (date) => this.setState({endDate: date}, () => this.setDayStates());
 
+	/**
+	 * Adjusts the state based on the un/checked day checkboxes
+	 *
+	 * @param {ChangeEvent} e
+	 */
 	handleCheckDay = (e) => 
 	{
 		const updatedDays = this.state.days.map((day) => 
@@ -112,6 +125,12 @@ class EditModal extends Component
 		this.setState({days: updatedDays});
 	};
 
+	/**
+	 * Updates the event via the event service module and calls the handleSubmit prop.
+	 * In this case, said prop refreshes the event list and closes the modal
+	 *
+	 * @param {SubmitEvent} e
+	*/
 	handleSubmit = async (e) => 
 	{
 		e.preventDefault();
@@ -136,6 +155,10 @@ class EditModal extends Component
 		await this.props.handleSubmit();
 	}
 
+	/**
+	 * Deletes the event via the event service module and calls the handleSubmit prop.
+	 * In this case, said prop refreshes the event list and closes the modal
+	 */
 	handleDeleteEvent = async () =>
 	{
 		await destroyEvent(this.state.eventId);
@@ -143,6 +166,10 @@ class EditModal extends Component
 		await this.props.handleSubmit();
 	}
 
+	/**
+	 * Deletes the event date via the event service module and calls the handleSubmit prop.
+	 * In this case, said prop refreshes the event list and closes the modal
+	 */
 	handleDeleteEventDate = async () => 
 	{
 		await destroyEventDate(this.state.dateId);
