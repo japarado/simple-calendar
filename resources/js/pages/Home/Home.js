@@ -88,9 +88,10 @@ class Home extends Component
 		await this.refreshEvents();
 	}
 
-	handleSubmitEdit = async (event, e) => 
+	handleSubmitEdit = async (e) => 
 	{
-		e.preventDefault();
+		this.setState({isModalOpen: false});
+		await this.refreshEvents();
 	}
 
 	handleClickEvent = (arg) => 
