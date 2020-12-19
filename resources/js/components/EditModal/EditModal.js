@@ -5,7 +5,7 @@ import "./EditModal.scss";
 import Modal from "react-bootstrap/Modal";
 import Form from "../Form/Form";
 
-import {toast} from 'react-toastify';
+import {toast} from "react-toastify";
 
 import {eachDayOfInterval, format} from "date-fns";
 import {createDayArray, prettifyDate} from "../../utils";
